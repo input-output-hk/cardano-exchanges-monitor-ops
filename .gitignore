@@ -1,0 +1,7 @@
+globals.nix
+static
+keys
+.envrc
+genesis-keys
+*.swp
+result*
