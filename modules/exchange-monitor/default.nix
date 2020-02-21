@@ -2,9 +2,8 @@
 
 let
   python = python3.withPackages (ps: with ps; [ prometheus_client requests ]);
-in runCommand "exchanges-monitor" {
+in runCommand "exchange-monitor-binance" {
   buildInputs = [ makeWrapper ];
 } ''
-  mkdir -p $out/bin
-  makeWrapper ${python}/bin/python $out/bin/exchanges-monitor --add-flags ${./exchanges-monitor.py}
+  makeWrapper ${python}/bin/python $out --add-flags ${./exchange-monitor.py}
 ''

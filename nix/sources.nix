@@ -62,10 +62,6 @@ with rec
     then builtins.fetchTarball { inherit url; }
     else pkgs.fetchzip attrs;
 
-  # A wrapper around pkgs.fetchurl that has inspectable arguments,
-  # annoyingly this means we have to specify them
-  fetchurl = { url, sha256 }@attrs: pkgs.fetchurl attrs;
-
   hasNixpkgsPath = (builtins.tryEval <nixpkgs>).success;
   hasThisAsNixpkgsPath =
     (builtins.tryEval <nixpkgs>).success && <nixpkgs> == ./.;
@@ -90,7 +86,7 @@ with rec
     in builtins.getAttr fetcherName {
       "tarball" = fetchzip;
       "builtin-tarball" = builtins_fetchTarball;
-      "file" = fetchurl;
+      "file" = pkgs.fetchurl;
       "builtin-url" = builtins_fetchurl;
     };
 };

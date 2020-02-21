@@ -1,13 +1,14 @@
 
 let
-  pkgs = import ../ {};
+  iohkNix = (import ../../lib.nix).iohkNix;
+  pkgs = iohkNix.pkgs;
   dependencies = with pkgs.python3Packages; [
     requests
     prometheus_client
     ipython
   ];
   shell = pkgs.mkShell {
-    name = "exchanges-monitor-shell";
+    name = "exchange-monitor";
     buildInputs = dependencies;
   };
 

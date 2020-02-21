@@ -73,7 +73,7 @@ def process_bithumb_assets():
     if crypto_asset['status'] == '0000':
         bithumb_active.set(True)
     sys.stdout.flush()
-
+    
     # Decorate function with metric.
 @HITBTC_REQUEST_TIME.time()
 def process_hitbtc_assets():
@@ -82,10 +82,10 @@ def process_hitbtc_assets():
     crypto_asset = json.loads(json_obj.read().decode('utf-8'))
     print("Processing HITbtc assets")
     if crypto_asset['id'] == 'ADA':
-        hitbtc_deposits.set(crypto_asset['payinEnabled'])
+        hitbtc_deposits.set(crypto_asset['payinEnabled']) 
         hitbtc_withdraws.set(crypto_asset['payoutEnabled'])
     sys.stdout.flush()
-
+    
 # Decorate function with metric.
 @COINEX_REQUEST_TIME.time()
 def process_coinex_assets():
@@ -95,7 +95,7 @@ def process_coinex_assets():
     print ("Processing Coinex assets")
     if crypto_asset['code'] == 0:
         coinex_deposits.set(crypto_asset['data']['ADA']['can_deposit'])
-        coinex_withdraws.set(crypto_asset['data']['ADA']['can_withdraw'])
+        coinex_withdraws.set(crypto_asset['data']['ADA']['can_withdraw']) 
     sys.stdout.flush()
 
 # Decorate function with metric.
@@ -123,7 +123,7 @@ def process_bkex_assets():
     for crypto_asset in access_content:
         if crypto_asset['coinType'] == 'ADA':
             bkex_deposits.set(crypto_asset['supportDeposit'])
-            bkex_withdraws.set(crypto_asset['supportTrade'])
+            bkex_withdraws.set(crypto_asset['supportTrade']) 
     sys.stdout.flush()
 
 # Decorate function with metric.
@@ -160,7 +160,7 @@ def process_mxc_assets():
     req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
     json_obj = urllib.request.urlopen(req)
     crypto_assets = json.loads(json_obj.read().decode('utf-8'))
-    print ("Processing MXC assets")
+    print ("Processing MXC assets")  
     access_content = crypto_assets['data']
     for crypto_asset in access_content:
      if crypto_asset == 'ada_usdt':
@@ -208,7 +208,7 @@ if __name__ == '__main__':
             process_coinex_assets()
         except:
             print("failed to process coinex assets")
-            coinex_active.set(False)
+            coinex_active.set(False)         
         try:
             process_bitmax_assets()
         except:
@@ -239,5 +239,5 @@ if __name__ == '__main__':
            # process_get_height()
         #except:
          #   print("failed to process chainwalker")
-         #   chainwalker_active.set(False)
+         #   chainwalker_active.set(False)           
         time.sleep(SLEEP_TIME)
