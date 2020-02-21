@@ -7,43 +7,24 @@
 with (import ../nix {});
 let
 
+  inherit (lib) recursiveUpdate mapAttrs listToAttrs imap1;
+  inherit (iohk-ops-lib) roles modules
+
   nodes = mapAttrs  (_: mkNode) {
     monitoring = {
       deployment.ec2.region = "eu-central-1";
       imports = [
         xlarge-monitor
         roles.monitor
-        ../modules/monitoring-cardano.nix
+        ../modules/monitoring-exchanges.nix
+        ../modules/exchanges-monitor-service.nix
       ];
       node = {
         roles.isMonitor = true;
         org = "IOHK";
       };
 
-      services.prometheus = {
-        scrapeConfigs = [
-          # TODO: remove once explorer exports metrics at path `/metrics`
-          {
-            job_name = "explorer-exporter";
-            scrape_interval = "10s";
-            metrics_path = "/metrics2/exporter";
-            static_configs = [{
-              targets = [ "explorer-ip" ];
-              labels = { alias = "explorer-exporter"; };
-            }];
-          }
-          # TODO: remove once explorer python api is deprecated
-          {
-            job_name = "explorer-python-api";
-            scrape_interval = "10s";
-            metrics_path = "/metrics/explorer-python-api";
-            static_configs = [{
-              targets = [ "explorer-ip" ];
-              labels = { alias = "explorer-python-api"; };
-            }];
-          }
-        ];
-      };
+      services.monitoring-services.logging = false;
     };
   };
 

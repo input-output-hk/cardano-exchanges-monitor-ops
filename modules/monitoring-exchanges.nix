@@ -1,6 +1,6 @@
 {
   services.monitoring-services = {
-    applicationDashboards = ./grafana/exchanges-monitor;
+    #applicationDashboards = ./grafana/exchanges-monitor;
 
     applicationRules = [
       {
