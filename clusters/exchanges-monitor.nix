@@ -8,7 +8,7 @@ with (import ../nix {});
 let
 
   inherit (lib) recursiveUpdate mapAttrs listToAttrs imap1;
-  inherit (iohk-ops-lib) roles modules
+  inherit (iohk-ops-lib) roles modules;
 
   nodes = mapAttrs  (_: mkNode) {
     monitoring = {
