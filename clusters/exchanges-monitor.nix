@@ -21,7 +21,7 @@ let
         roles.isMonitor = true;
         org = "IOHK";
       };
-
+      services.exchanges-monitor.enable = true;
       services.monitoring-services.logging = false;
     };
   };
