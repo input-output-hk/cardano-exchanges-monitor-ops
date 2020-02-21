@@ -1,7 +1,5 @@
 { targetEnv
 , medium
-, xlarge
-, xlarge-monitor
 , ...
 }:
 with (import ../nix {});
@@ -14,7 +12,7 @@ let
     monitoring = {
       deployment.ec2.region = "eu-central-1";
       imports = [
-        xlarge-monitor
+        medium
         roles.monitor
         ../modules/monitoring-exchanges.nix
         ../modules/exchanges-monitor-service.nix
