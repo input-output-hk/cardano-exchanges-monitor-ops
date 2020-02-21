@@ -16,7 +16,7 @@ in {
     systemd.services.exchanges-monitor = {
       wantedBy = [ "multi-user.target" ];
       script = ''
-        exec exchanges-monitor
+        exec ${pkgs.exchanges-monitor}/bin/exchanges-monitor
       '';
       serviceConfig = {
         User = "exchanges-monitor";

@@ -1,7 +1,7 @@
-{ python3, makeWrapper, runCommand }:
+{ python35, makeWrapper, runCommand }:
 
 let
-  python = python3.withPackages (ps: with ps; [ prometheus_client requests ]);
+  python = python35.withPackages (ps: with ps; [ prometheus_client requests ]);
 in runCommand "exchanges-monitor" {
   buildInputs = [ makeWrapper ];
 } ''

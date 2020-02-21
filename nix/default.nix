@@ -7,6 +7,8 @@ let
   # overlays from ops-lib (include ops-lib sourcePaths):
   ops-lib-overlays = (import sourcePaths.ops-lib {}).overlays;
 
+  iohkNix = import sourcePaths.iohk-nix {};
+
   # our own overlays:
   local-overlays = [
     (import ./util.nix)
@@ -25,7 +27,7 @@ let
   upstream-overlays = [
       ( _: super: {
 
-      iohkNix = import sourcePaths.iohk-nix {};
+      inherit iohkNix;
 
       cardano-ops-overlays = overlays;
       sourcePaths = (super.sourcePaths or {}) // sourcePaths;
@@ -37,7 +39,15 @@ let
     local-overlays ++
     globals ++
     upstream-overlays;
+
+  # use our own nixpkgs if it exists in our sources,
+  # otherwise use iohkNix default nixpkgs.
+  nixpkgs = if (sourcePaths ? nixpkgs)
+    then (builtins.trace "Not using IOHK default nixpkgs (use 'niv drop nixpkgs' to use default for better sharing)"
+      sourcePaths.nixpkgs)
+    else (builtins.trace "Using IOHK default nixpkgs"
+      iohkNix.nixpkgs);
 in
-  import sourcePaths.nixpkgs {
+  import nixpkgs {
     inherit overlays system crossSystem config;
   }
