@@ -2,9 +2,9 @@ pkgs: {
 
   deploymentName = "exchanges-monitor";
 
-  dnsZone = "${pkgs.globals.domain}";
+  dnsZone = "cardano-exchanges.iohk.io";
 
-  domain = "cardano-exchanges.iohk.io";
+  domain = "${pkgs.globals.dnsZone}";
 
   ec2 = {
     credentials = {

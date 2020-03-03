@@ -37,7 +37,7 @@ let
     }
     {
       inherit nodes;
-      groups = [ allow-deployer-ssh ];
+      groups = [ allow-deployer-ssh allow-monitoring-collection ];
     }
   ];
 
@@ -77,6 +77,12 @@ let
           }
         ) orgs)
         regions);
+
+      route53HostedZones.hs = {
+        name = "${pkgs.globals.dnsZone}.";
+        accessKeyId = pkgs.globals.ec2.credentials.accessKeyIds.dns;
+        comment = "Hosted zone for ${pkgs.globals.dnsZone}";
+      };
     };
     defaults = { name, resources, config, ... }: {
       deployment.ec2 = {
