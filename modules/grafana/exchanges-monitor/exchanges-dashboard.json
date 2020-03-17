@@ -198,7 +198,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "binance_deposits{job=\"exchange-monitor\"} + binance_withdraws{job=\"exchange-monitor\"}",
+          "expr": "binance_deposits{job=\"exchanges-monitor\"} + binance_withdraws{job=\"exchanges-monitor\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -391,7 +391,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "hitbtc_deposits{job=\"exchange-monitor\"} + hitbtc_withdraws{job=\"exchange-monitor\"}",
+          "expr": "hitbtc_deposits{job=\"exchanges-monitor\"} + hitbtc_withdraws{job=\"exchanges-monitor\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -489,7 +489,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "coinex_deposits{job=\"exchange-monitor\"} + coinex_withdraws{job=\"exchange-monitor\"}",
+          "expr": "coinex_deposits{job=\"exchanges-monitor\"} + coinex_withdraws{job=\"exchanges-monitor\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -758,7 +758,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum_over_time((binance_deposits{job=\"exchange-monitor\"} + binance_withdraws{job=\"exchange-monitor\"} == bool 2)[4w:1m])) * 100 / (4 * 7 * 24 * 60)",
+          "expr": "(sum_over_time((binance_deposits{job=\"exchanges-monitor\"} + binance_withdraws{job=\"exchanges-monitor\"} == bool 2)[4w:1m])) * 100 / (4 * 7 * 24 * 60)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -930,7 +930,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum_over_time((hitbtc_deposits{job=\"exchange-monitor\"} + hitbtc_withdraws{job=\"exchange-monitor\"} == bool 2)[4w:1m])) * 100 / (4 * 7 * 24 * 60)",
+          "expr": "(sum_over_time((hitbtc_deposits{job=\"exchanges-monitor\"} + hitbtc_withdraws{job=\"exchanges-monitor\"} == bool 2)[4w:1m])) * 100 / (4 * 7 * 24 * 60)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -1016,7 +1016,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "(sum_over_time((coinex_deposits{job=\"exchange-monitor\"} + coinex_withdraws{job=\"exchange-monitor\"} == bool 2)[4w:1m])) * 100 / (4 * 7 * 24 * 60)",
+          "expr": "(sum_over_time((coinex_deposits{job=\"exchanges-monitor\"} + coinex_withdraws{job=\"exchanges-monitor\"} == bool 2)[4w:1m])) * 100 / (4 * 7 * 24 * 60)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "",
