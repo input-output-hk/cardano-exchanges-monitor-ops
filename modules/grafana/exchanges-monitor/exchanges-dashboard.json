@@ -2,7 +2,7 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:520",
+        "$$hashKey": "object:2790",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -199,11 +199,9 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "binance_active",
+          "expr": "binance_deposits{job=\"exchanges-monitor\"} + binance_withdraws{job=\"exchanges-monitor\"}",
           "format": "time_series",
-          "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1670,14 +1668,12 @@
           "dashes": false,
           "datasource": "prometheus",
           "fill": 0,
-          "fillGradient": 0,
           "gridPos": {
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 14
+            "y": 38
           },
-          "hiddenSeries": false,
           "id": 27,
           "legend": {
             "avg": false,
@@ -1692,9 +1688,6 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
-          "options": {
-            "dataLinks": []
-          },
           "percentage": false,
           "pluginVersion": "6.1.6",
           "pointradius": 2,
@@ -1914,7 +1907,7 @@
     ]
   },
   "timezone": "",
-  "title": "Exchange Monitor 2",
+  "title": "Exchange Monitor",
   "uid": "Ax8hX8ZZz",
   "variables": {
     "list": []
