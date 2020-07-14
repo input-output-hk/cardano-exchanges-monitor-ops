@@ -5,7 +5,7 @@
     applicationRules = [
       {
         alert = "exchange-down-binance";
-        expr = "binance_withdraws == 0 or binance_deposits == 0";
+        expr = "binance_active == 0";
         for = "10m";
         labels.severity = "page";
         annotations = {
