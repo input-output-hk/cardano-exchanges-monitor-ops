@@ -2,6 +2,7 @@
   "annotations": {
     "list": [
       {
+        "$$hashKey": "object:520",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -15,11 +16,11 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
   "links": [],
   "panels": [
     {
       "collapsed": false,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -198,9 +199,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "binance_deposits{job=\"exchanges-monitor\"} + binance_withdraws{job=\"exchanges-monitor\"}",
+          "expr": "binance_active",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1126,6 +1129,7 @@
     },
     {
       "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1246,6 +1250,7 @@
     },
     {
       "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1429,6 +1434,7 @@
     },
     {
       "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1528,6 +1534,7 @@
     },
     {
       "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1646,6 +1653,7 @@
     },
     {
       "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1662,12 +1670,14 @@
           "dashes": false,
           "datasource": "prometheus",
           "fill": 0,
+          "fillGradient": 0,
           "gridPos": {
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 38
+            "y": 14
           },
+          "hiddenSeries": false,
           "id": 27,
           "legend": {
             "avg": false,
@@ -1682,6 +1692,9 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
           "percentage": false,
           "pluginVersion": "6.1.6",
           "pointradius": 2,
@@ -1764,6 +1777,7 @@
     },
     {
       "collapsed": true,
+      "datasource": null,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1864,7 +1878,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 18,
+  "schemaVersion": 22,
   "style": "dark",
   "tags": [],
   "templating": {
@@ -1900,7 +1914,10 @@
     ]
   },
   "timezone": "",
-  "title": "Exchange Monitor",
+  "title": "Exchange Monitor 2",
   "uid": "Ax8hX8ZZz",
-  "version": 27
+  "variables": {
+    "list": []
+  },
+  "version": 1
 }
