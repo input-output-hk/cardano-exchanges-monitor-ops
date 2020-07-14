@@ -12,6 +12,7 @@ import sys
 EXPORTER_PORT = 8000
 SLEEP_TIME = 300 # 5 minutes
 BINANCE_REQUEST_TIME = Summary('binance_process_time', 'Time spent processing binance assets')
+BINANCE_MAINTENANCE_REQUEST_TIME = Summary('binance_maintenance_process_time', 'Time spent processing binance maintenance check')
 BITTREX_REQUEST_TIME = Summary('bittrex_process_time', 'Time spent processing bittrex assets')
 BITHUMB_REQUEST_TIME = Summary('bithumb_process_time', 'Time spent processing bithumb assets')
 HITBTC_REQUEST_TIME = Summary('hitbtc_process_time', 'Time spent processing hitbtc assets')
@@ -21,8 +22,7 @@ BITRUE_REQUEST_TIME = Summary('bitrue_process_time', 'Time spent processing bitr
 EXX_REQUEST_TIME = Summary('exx_process_time', 'Time spent processing exx assets')
 BKEX_REQUEST_TIME = Summary('bkex_process_time', 'Time spent processing bkex assets')
 MXC_REQUEST_TIME = Summary('mxc_process_time', 'Time spent processing mxc assets')
-binance_deposits = Gauge('binance_deposits', 'Binance Deposits enabled')
-binance_withdraws = Gauge('binance_withdraws', 'Binance Withdraws enabled')
+binance_active = Gauge('binance_active', 'Binance Wallet enabled')
 bittrex_active = Gauge('bittrex_active', 'Bittrex Wallet enabled')
 bittrex_withdraw_queue_depth = Gauge('bittrex_withdraw_queue_depth', 'Bittrex Withdraw Queue Depth')
 bithumb_active = Gauge('bithumb_active', 'Bithumb Wallet enabled')
@@ -40,15 +40,36 @@ mxc_active = Gauge('mxc_active', 'MXC Wallet enabled')
 # Decorate function with metric.
 @BINANCE_REQUEST_TIME.time()
 def process_binance_assets():
-    url = "https://www.binance.com/assetWithdraw/getAllAsset.html"
+    url = "https://api.binance.com/api/v3/exchangeInfo"
     json_obj = urllib.request.urlopen(url)
     crypto_assets = json.loads(json_obj.read().decode('utf-8'))
     print("processing binance assets")
-    for crypto_asset in crypto_assets:
-        if crypto_asset['assetCode']== 'ADA':
-            binance_deposits.set(crypto_asset['enableCharge'])
-            binance_withdraws.set(crypto_asset['enableWithdraw'])
+    access_content = crypto_assets['symbols']
+    counter = 0
+    for crypto_asset in access_content:
+        if crypto_asset['baseAsset'] == 'ADA' and crypto_asset['status'] == 'TRADING':
+            counter +=1   
+        elif crypto_asset['baseAsset'] == 'ADA' and crypto_asset['status'] != 'TRADING':
+            counter -=1
+    if counter > 3:
+        binance_active.set(True)
+    else:
+        process_binance_maintenance()
     sys.stdout.flush()
+
+# Decorate function with metric.
+@BINANCE_MAINTENANCE_REQUEST_TIME.time()
+def process_binance_maintenance():
+    url = "https://api.binance.com/wapi/v3/systemStatus.html"
+    json_obj = urllib.request.urlopen(url)
+    crypto_assets = json.loads(json_obj.read().decode('utf-8'))
+    print("processing binance maintenance check")
+    print(crypto_assets)
+    if crypto_assets['status'] == 1:
+        binance_active.set(True)
+    elif crypto_assets['status'] == 0:
+        print("failed to process Binance maintenance check")
+        binance_active.set(False)
 
 # Decorate function with metric.
 @BITTREX_REQUEST_TIME.time()
@@ -185,9 +206,8 @@ if __name__ == '__main__':
         try:
             process_binance_assets()
         except:
-            print("failed to process binance assets")
-            binance_deposits.set(False)
-            binance_withdraw.set(False)
+            print("failed to process Binance assets")
+            binance_active.set(False)
         try:
             process_bittrex_assets()
         except:
