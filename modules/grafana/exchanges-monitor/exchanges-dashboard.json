@@ -181,13 +181,8 @@
         },
         {
           "from": "0.5",
-          "text": "Partially Down",
-          "to": "1.5"
-        },
-        {
-          "from": "1.5",
           "text": "Online",
-          "to": "2"
+          "to": "1"
         }
       ],
       "sparkline": {
@@ -207,7 +202,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0.5,1.5",
+      "thresholds": "0.5,0.5",
       "timeFrom": null,
       "timeShift": null,
       "title": "Binance",
