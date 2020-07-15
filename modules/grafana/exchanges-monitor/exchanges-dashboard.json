@@ -2,7 +2,6 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:2790",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -16,6 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 5,
   "links": [],
   "panels": [
     {
@@ -199,9 +199,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "binance_deposits{job=\"exchanges-monitor\"} + binance_withdraws{job=\"exchanges-monitor\"}",
+          "expr": "binance_active",
           "format": "time_series",
+          "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
@@ -1144,12 +1146,14 @@
           "dashes": false,
           "datasource": "prometheus",
           "fill": 0,
+          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 24,
             "x": 0,
             "y": 10
           },
+          "hiddenSeries": false,
           "id": 2,
           "legend": {
             "avg": false,
@@ -1164,6 +1168,9 @@
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
           "percentage": false,
           "pluginVersion": "6.1.6",
           "pointradius": 2,
@@ -1175,30 +1182,12 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "binance_deposits",
+              "expr": "binance_active",
               "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "A"
-            },
-            {
-              "expr": "binance_withdraws",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "B"
-            },
-            {
-              "expr": "min(binance_withdraws)",
-              "format": "time_series",
-              "instant": false,
               "interval": "",
               "intervalFactor": 1,
-              "refId": "C"
-            },
-            {
-              "expr": "max(binance_withdraws)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "D"
+              "legendFormat": "",
+              "refId": "A"
             }
           ],
           "thresholds": [],
@@ -1539,23 +1528,24 @@
         "x": 0,
         "y": 12
       },
-      "id": 21,
+      "id": 54,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "cacheTimeout": null,
           "dashLength": 10,
           "dashes": false,
           "datasource": "prometheus",
-          "fill": 0,
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 9,
+            "h": 8,
             "w": 12,
             "x": 0,
-            "y": 37
+            "y": 1
           },
-          "id": 23,
+          "hiddenSeries": false,
+          "id": 56,
           "legend": {
             "avg": false,
             "current": false,
@@ -1567,10 +1557,11 @@
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
           "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
           "percentage": false,
-          "pluginVersion": "6.1.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1580,35 +1571,17 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "hitbtc_deposits",
-              "format": "time_series",
-              "intervalFactor": 1,
+              "expr": "bitrue_active",
+              "interval": "",
+              "legendFormat": "",
               "refId": "A"
-            },
-            {
-              "expr": "hitbtc_withdraws",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "B"
-            },
-            {
-              "expr": "min(hitbtc_withdraws)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "C"
-            },
-            {
-              "expr": "max(hitbtc_withdraws)",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "D"
             }
           ],
           "thresholds": [],
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Hit BTC",
+          "title": "Bitrue",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1646,7 +1619,7 @@
           }
         }
       ],
-      "title": "Hit BTC",
+      "title": "Bitrue",
       "type": "row"
     },
     {
@@ -1657,6 +1630,221 @@
         "w": 24,
         "x": 0,
         "y": 13
+      },
+      "id": 45,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 15
+          },
+          "hiddenSeries": false,
+          "id": 46,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pluginVersion": "6.1.6",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "bitmax_active",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Bitmax Status",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Bitmax",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 50,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "hiddenSeries": false,
+          "id": 52,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "bkex_deposits",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            },
+            {
+              "expr": "bkex_withdraws",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Panel Title",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "BKEX",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
       },
       "id": 25,
       "panels": [
@@ -1775,25 +1963,26 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 16
       },
-      "id": 45,
+      "id": 58,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "cacheTimeout": null,
           "dashLength": 10,
           "dashes": false,
           "datasource": "prometheus",
-          "fill": 0,
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 9,
+            "h": 8,
             "w": 12,
             "x": 0,
-            "y": 39
+            "y": 7
           },
-          "id": 46,
+          "hiddenSeries": false,
+          "id": 60,
           "legend": {
             "avg": false,
             "current": false,
@@ -1805,10 +1994,11 @@
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
           "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
           "percentage": false,
-          "pluginVersion": "6.1.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1818,9 +2008,9 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "bitmax_active",
-              "format": "time_series",
-              "intervalFactor": 1,
+              "expr": "exx_active",
+              "interval": "",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -1828,7 +2018,7 @@
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "Bitmax Status",
+          "title": "EXX",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1866,7 +2056,229 @@
           }
         }
       ],
-      "title": "Bitmax",
+      "title": "EXX",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 21,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "cacheTimeout": null,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 0,
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 37
+          },
+          "id": 23,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pluginVersion": "6.1.6",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "hitbtc_deposits",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "A"
+            },
+            {
+              "expr": "hitbtc_withdraws",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "B"
+            },
+            {
+              "expr": "min(hitbtc_withdraws)",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "C"
+            },
+            {
+              "expr": "max(hitbtc_withdraws)",
+              "format": "time_series",
+              "intervalFactor": 1,
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Hit BTC",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Hit BTC",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 62,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 19
+          },
+          "hiddenSeries": false,
+          "id": 64,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "mxc_active",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "MXC",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "MXC",
       "type": "row"
     }
   ],
@@ -1908,7 +2320,7 @@
   },
   "timezone": "",
   "title": "Exchange Monitor",
-  "uid": "Ax8hX8ZZz",
+  "uid": "tYwFdd7Gk",
   "variables": {
     "list": []
   },
