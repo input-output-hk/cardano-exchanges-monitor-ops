@@ -48,7 +48,7 @@ def process_binance_assets():
     counter = 0
     for crypto_asset in access_content:
         if crypto_asset['baseAsset'] == 'ADA' and crypto_asset['status'] == 'TRADING':
-            counter +=1   
+            counter +=1
         elif crypto_asset['baseAsset'] == 'ADA' and crypto_asset['status'] != 'TRADING':
             counter -=1
     if counter > 3:
@@ -228,7 +228,8 @@ if __name__ == '__main__':
             process_coinex_assets()
         except:
             print("failed to process coinex assets")
-            coinex_active.set(False)
+            coinex_deposits.set(False)
+            coinex_withdrawals.set(False)
         try:
             process_bitmax_assets()
         except:
