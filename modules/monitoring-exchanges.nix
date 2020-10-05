@@ -40,6 +40,15 @@
         };
       }
       {
+        alert = "exchange-down-huobi";
+        expr = "huobi_withdraws == false or huobi_deposits == false";
+        for = "10m";
+        labels.severity = "page";
+        annotations = {
+          description = "{{$labels.alias}} withdraws/deposits down for >=10mins";
+        };
+      }
+      {
         alert = "exchange-down-coinex";
         expr = "coinex_withdraws == false or coinex_deposits == false";
         for = "10m";
