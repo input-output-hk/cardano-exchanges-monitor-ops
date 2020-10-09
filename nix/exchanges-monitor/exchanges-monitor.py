@@ -20,6 +20,7 @@ COINEX_REQUEST_TIME = Summary('coinex_process_time', 'Time spent processing coin
 BITMAX_REQUEST_TIME = Summary('bitmax_process_time', 'Time spent processing bitmax assets')
 BITRUE_REQUEST_TIME = Summary('bitrue_process_time', 'Time spent processing bitrue assets')
 HUOBI_REQUEST_TIME = Summary('huobi_process_time', 'Time spent processing huobi assets')
+KUCOIN_REQUEST_TIME = Summary('kucoin_process_time', 'Time spent processing kucoin assets')
 EXX_REQUEST_TIME = Summary('exx_process_time', 'Time spent processing exx assets')
 BKEX_REQUEST_TIME = Summary('bkex_process_time', 'Time spent processing bkex assets')
 MXC_REQUEST_TIME = Summary('mxc_process_time', 'Time spent processing mxc assets')
@@ -28,6 +29,8 @@ bittrex_active = Gauge('bittrex_active', 'Bittrex Wallet enabled')
 bittrex_withdraw_queue_depth = Gauge('bittrex_withdraw_queue_depth', 'Bittrex Withdraw Queue Depth')
 huobi_deposits = Gauge('huobi_deposits', 'Huobi deposits enabled')
 huobi_withdraws = Gauge('huobi_withdraw', 'Huobi withdraws enabled')
+kucoin_deposits = Gauge('kucoin_deposits', 'Kucoin deposits enabled')
+kucoin_withdraws = Gauge('kucoin_withdraw', 'Kucoin withdraws enabled')
 bithumb_active = Gauge('bithumb_active', 'Bithumb Wallet enabled')
 hitbtc_deposits = Gauge('hitbtc_deposits', 'Hitbtc Deposits enabled')
 hitbtc_withdraws = Gauge('hitbtc_withdraws', 'Hitbtc Withdraws enabled')
@@ -105,6 +108,19 @@ def process_huobi_assets():
                 if ada_live['depositStatus'] == 'allowed':
                     huobi_deposits.set(True)
                 sys.stdout.flush()
+
+def process_kucoin_assets():
+    url = "https://api.kucoin.com/api/v1/currencies"
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    json_obj = urllib.request.urlopen(req)
+    crypto_assets = json.loads(json_obj.read().decode('utf-8'))
+    access_content = crypto_assets['data']
+    print("processing kucoin assets")
+    for crypto_asset in access_content:
+        if crypto_asset['currency'] == 'ADA':
+            kucoin_withdraws.set(crypto_asset['isWithdrawEnabled'])
+            kucoin_deposits.set(crypto_asset['isDepositEnabled'])
+    sys.stdout.flush()
 
 # Decorate function with metric.
 @BITHUMB_REQUEST_TIME.time()
@@ -236,6 +252,12 @@ if __name__ == '__main__':
             print("failed to process huobi assets")
             huobi_deposits.set(False)
             huobi_withdraws.set(False)
+        try:
+            process_kucoin_assets()
+        except:
+            print("failed to process kucoin assets")
+            kucoin_deposits.set(False)
+            kucoin_withdraws.set(False)
         try:
             process_bittrex_assets()
         except:
