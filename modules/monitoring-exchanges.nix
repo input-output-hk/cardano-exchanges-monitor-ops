@@ -48,6 +48,15 @@
           description = "{{$labels.alias}} withdraws/deposits down for >=10mins";
         };
       }
+            {
+        alert = "exchange-down-kucoin";
+        expr = "kucoin_withdraws == false or kucoin_deposits == false";
+        for = "10m";
+        labels.severity = "page";
+        annotations = {
+          description = "{{$labels.alias}} withdraws/deposits down for >=10mins";
+        };
+      }
       {
         alert = "exchange-down-coinex";
         expr = "coinex_withdraws == false or coinex_deposits == false";
