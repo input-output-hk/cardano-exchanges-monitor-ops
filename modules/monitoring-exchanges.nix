@@ -94,14 +94,6 @@
         };
       }
       {
-        expr = "exx_active == 0";
-        for = "10m";
-        labels.severity = "page";
-        annotations = {
-          description = "{{$labels.alias}} withdraws/deposits down for >=10mins";
-        };
-      }
-      {
         alert = "exchange-down-mxc";
         expr = "mxc_active == 0";
         for = "10m";
