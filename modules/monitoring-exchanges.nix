@@ -94,7 +94,6 @@
         };
       }
       {
-        alert = "exchange-down-exx";
         expr = "exx_active == 0";
         for = "10m";
         labels.severity = "page";
